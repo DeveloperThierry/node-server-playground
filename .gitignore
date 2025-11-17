@@ -1,0 +1,64 @@
+# Compilation, Build, and Node Artifacts
+# -----------------------------
+# Compiled object files (rare in pure Node, but good for native modules)
+*.o
+*.a
+*.so
+
+# Executables (typically handled by build/dist, but left for completeness)
+*.exe
+*.out
+*.bin
+*.elf
+
+# Logs and Temporary Directories
+*.log
+log/
+tmp/
+temp/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependencies and Build Outputs
+/node_modules
+/vendor
+/build
+/dist
+/out
+/es
+/lib
+
+# Package Manager Specific Artifacts
+/pnpm-lock.yaml
+/pnpm-store
+.yarn/cache
+
+# Compiled/Generated Code (e.g., from TypeScript or Babel)
+*.js.map
+*.d.ts
+
+# Configuration and Environment Files (should not be committed)
+.env
+.env.development
+.env.production
+
+# Testing and Coverage
+/coverage
+/.nyc_output
+/test-results.xml
+
+# npm artifacts
+/npm-shrinkwrap.json
+/package-lock.json
+
+# Core dump files (for debugging crashes)
+*.mem
+/v8-profiler.*.json
+/isolate-*
+
+# Editor/IDE temporary files
+*.swp
+.vscode/
+.idea/
