@@ -2,13 +2,19 @@ import http from "node:http";
 import { getDataFromDB } from "./database/db.js";
 import { sendJSONResponse } from "./utils/sendJSONResponse.js";
 import { getDataByPathParams } from "./utils/getDataByPathParams.js";
+import { getDataByQueryParams } from "./utils/getDataByQueryParams.js";
 
 const PORT = 8000;
 
+// PREVIOUS CHALLENGE
 const server = http.createServer(async (req, res) => {
   const destinations = await getDataFromDB();
-  if (req.url === "/api" && req.method === "GET") {
-    sendJSONResponse(res, 200, detsinations);
+  const urlObj = new URL(req.url, `http://${req.headers.host}`)
+  const queryParams = Object.fromEntries(urlObj.searchParams)
+  if (urlObj.pathname === "/api" && req.method === "GET") {
+    let filteredDestinations = getDataByQueryParams(destinations, queryParams)
+    console.log(queryParams)
+    sendJSONResponse(res, 200, filteredDestinations);
   } else if (req.url.startsWith("/api/continent") && req.method === "GET") {
 
     const continent = req.url.split("/").pop();
@@ -25,5 +31,7 @@ const server = http.createServer(async (req, res) => {
     });
   }
 });
+
+
 
 server.listen(PORT, () => console.log("server running"));
